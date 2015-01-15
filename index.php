@@ -47,10 +47,10 @@ tr.head td {
 		<form novalidate class="form-horizontal" role="form" name="userForm">
 			<input ng-model="form.id" type="hidden" />
 			<div class="form-group">
-				<label for="txtName" class="col-sm-2 control-label">Location</label>
+				<label for="txtName" class="col-sm-2 control-label">City</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="geocomplete" name="geocomplete"
-						style="width: 300px;" type="text" placeholder="Location address" />
+					<input class="form-control" id="txtCity" name="txtCity"
+						style="width: 300px;" type="text" placeholder="Enter your city name" />
 
 				</div>
 			</div>
@@ -59,14 +59,6 @@ tr.head td {
 				<div class="col-sm-4">
 					<input type="text" name='country' class="form-control"
 						id="txtCountry" placeholder="Country" />
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="txtEdition" class="col-sm-2 control-label">City</label>
-				<div class="col-sm-4">
-					<input type="text" name='city' class="form-control" id="txtCity"
-						placeholder="City" />
 				</div>
 			</div>
 
@@ -122,13 +114,13 @@ tr.head td {
 
 	<script>
 	$(document).ready(function() {
-	    $("#geocomplete").geocomplete()
+	    $("#txtCity").geocomplete()
 	    .bind("geocode:result", function(event, result){
 		    //console.log(result);
-		    //console.log($("#geocomplete").val());
+		    //console.log($("#txtCity").val());
     		setWaiting();
             $.ajax({
-        	   url : './request.php?q=' + encodeURIComponent($('#geocomplete').val()),
+        	   url : './request.php?q=' + encodeURIComponent($('#txtCity').val()),
         	   dataType : 'json',
         	   success : function(res) {
         	       $('#txtCountry').val(res.country.name);
@@ -143,7 +135,9 @@ tr.head td {
         	           $('#txtCity').val(res.town.name);
         	       } else if (!!res.district) {
         	           $('#txtCity').val(res.district.name);
-        	       }
+        	       } else if (!!res.region) {
+                     $('#txtCity').val(res.region.name);
+                 }
         	       
         	       setEnable();
                }, 
@@ -155,12 +149,12 @@ tr.head td {
 
 	    function setWaiting() {
 		    $('#txtCountry').attr('disabled', 'disabled').val('Waiting ... ');
-		    $('#txtCity').attr('disabled', 'disabled').val('Waiting ... ');
+		    //$('#txtCity').attr('disabled', 'disabled').val('Waiting ... ');
 	    }
 
 	    function setEnable() {
 		    $('#txtCountry').removeAttr('disabled');
-		    $('#txtCity').removeAttr('disabled');
+		    //$('#txtCity').removeAttr('disabled');
 	    }
 
 	});
