@@ -50,7 +50,7 @@ tr.head td {
 				<label for="txtName" class="col-sm-2 control-label">Location</label>
 				<div class="col-sm-4">
 					<input class="form-control" id="geocomplete" name="geocomplete"
-						style="width: 300px;" type="text" placeholder="Location address" />
+						style="width: 300px;" type="text" placeholder="Location" />
 
 				</div>
 			</div>
