@@ -1,6 +1,6 @@
 <?php
-require_once ('/libs/Guzzle/vendor/autoload.php');
-require_once ('/libs/IDHelper.php');
+require_once ('./libs/Guzzle/vendor/autoload.php');
+require_once ('./libs/IDHelper.php');
 
 /**
  * ZoneGeography
@@ -354,12 +354,13 @@ class ZoneGeography
      */
     private function _getGroupByCountry()
     {
-        if (! empty($this->country)) {
+        if (!empty($this->country)) {
             foreach ($this->_getGroups() as $key => $value) {
                 if (in_array($this->country, $value)) {
                     return $key;
                 }
             }
+            return 'default';
         } else {
             throw new Exception('The country not found', 500);
         }
@@ -786,6 +787,18 @@ class ZoneGeography
                     'label' => 'locality',
                     'type' => 'city'
                 )
+            ),
+            'default' => array(
+                '/location/country' => array(
+                    'name' => $this->country,
+                    'label' => 'country',
+                    'type' => 'country'
+                ),
+                '/location/citytown' => array(
+                    'name' => $this->administrativeLevel1,
+                    'label' => 'administrative_area_level_1',
+                    'type' => 'city'
+                ),
             )
         );
         if (isset($groups[$key])) {
