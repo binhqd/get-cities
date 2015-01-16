@@ -24,6 +24,7 @@
 tr.head td {
 	background: #ddd
 }
+#lblLocation {font-style: italic}
 </style>
 </head>
 <body>
@@ -43,17 +44,20 @@ tr.head td {
 		</div>
 
 		<!-- $info here -->
-
+        
 		<form novalidate class="form-horizontal" role="form" name="userForm">
 			<input ng-model="form.id" type="hidden" />
 			<div class="form-group">
-				<label for="txtName" class="col-sm-2 control-label">Location</label>
-				<div class="col-sm-4">
-					<input class="form-control" id="geocomplete" name="geocomplete"
-						style="width: 300px;" type="text" placeholder="Location" />
-
+				
+				<div class="col-sm-8">
+				    <div id='locationPreview'>
+				        <span id='lblLocation'>You have not provide your location yet</span> <a href='javascript:void(0)' id='lnkChangeLocation'>Change</a>
+				    </div>
+				    
+					<input class="form-control" id="geocomplete" name="geocomplete" style="display:none" type="text" placeholder="Select your city and country by enter your location" />
 				</div>
 			</div>
+			<!-- 
 			<div class="form-group">
 				<label for="txtEdition" class="col-sm-2 control-label">Country</label>
 				<div class="col-sm-4">
@@ -69,7 +73,7 @@ tr.head td {
 						placeholder="City" />
 				</div>
 			</div>
-
+             -->
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-default btn-primary">Save</button>
@@ -123,28 +127,36 @@ tr.head td {
 	$(document).ready(function() {
 	    $("#geocomplete").geocomplete()
 	    .bind("geocode:result", function(event, result){
-		    //console.log(result);
-		    //console.log($("#geocomplete").val());
-    		setWaiting();
+    		$('#geocomplete').hide();
+    		$('#locationPreview').show();
+    		$('#lblLocation').html("processing ...");
+    		
             $.ajax({
         	   url : './request.php?q=' + encodeURIComponent($('#geocomplete').val()),
         	   dataType : 'json',
         	   success : function(res) {
-        	       $('#txtCountry').val(res.country.name);
+        	       $('#geocomplete').val('');
+        	       var label = "";
+        	       
         	       
         	       if (!!res.city) {
-        	           $('#txtCity').val(res.city.name);
+        	           label = res.city.name;
         	       } else if (!!res.province) {
-        	           $('#txtCity').val(res.province.name);
+        	           label = res.province.name;
         	       } else if (!!res.community) {
-        	           $('#txtCity').val(res.community.name);
+        	           label = res.community.name;
         	       } else if (!!res.town) {
-        	           $('#txtCity').val(res.town.name);
+        	           label = res.town.name;
         	       } else if (!!res.district) {
-        	           $('#txtCity').val(res.district.name);
+        	           label = res.district.name;
         	       }
         	       
-        	       setEnable();
+        	       if (label != '')
+        	           label += ', ' + res.country.name;
+        	       else 
+        	           label = res.country.name;
+        	           
+        	       $('#lblLocation').html(label);
                }, 
                error : function(xhr) {
         	       console.log(xhr);
@@ -161,7 +173,11 @@ tr.head td {
 		    $('#txtCountry').removeAttr('disabled');
 		    $('#txtCity').removeAttr('disabled');
 	    }
-
+        
+        $('#lnkChangeLocation').click(function() {
+            $('#locationPreview').hide();
+            $('#geocomplete').show();
+        });
 	});
 	</script>
 </body>

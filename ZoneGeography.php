@@ -62,6 +62,7 @@ class ZoneGeography
     private function _getDataFromAddress($address)
     {
         $data = (new \GuzzleHttp\Client())->get($this->geoURL . $address)->json();
+        
         if (! empty($data['results'])) {
             $this->geographyData = $data['results'][0]['address_components'];
         } else {
