@@ -1,13 +1,5 @@
-<?php
-$config = require (dirname(__FILE__) . "/config/config.php");
-require_once (dirname(__FILE__) . "/libs/functions.php");
-require_once (dirname(__FILE__) . "/libs/Country.php");
-
-$obj = new Country($config);
-$countries = $obj->countries;
-?>
 <!doctype html>
-<html class="no-js" ng-app="cityApp">
+<html class="no-js">
 <head>
 <meta charset="utf-8">
 <title>City Suggestion</title>
@@ -43,22 +35,49 @@ tr.head td {
 	<div class="container">
 		<div class="header">
 			<ul class="nav nav-pills pull-right">
-				<li class="active">
-					<a href="#">Home</a>
-				</li>
-				<li>
-					<a href="#">About</a>
-				</li>
-				<li>
-					<a href="#">Contact</a>
-				</li>
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
 			</ul>
 			<h3 class="text-muted">City suggestion</h3>
 		</div>
 
 		<!-- $info here -->
 
-        <div ui-view="tabContent"></div>
+		<form novalidate class="form-horizontal" role="form" name="userForm">
+			<input ng-model="form.id" type="hidden" />
+			<div class="form-group">
+				<label for="txtName" class="col-sm-2 control-label">Location</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="geocomplete" name="geocomplete"
+						style="width: 300px;" type="text" placeholder="Location" />
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="txtEdition" class="col-sm-2 control-label">Country</label>
+				<div class="col-sm-4">
+					<input type="text" name='country' class="form-control"
+						id="txtCountry" placeholder="Country" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="txtEdition" class="col-sm-2 control-label">City</label>
+				<div class="col-sm-4">
+					<input type="text" name='city' class="form-control" id="txtCity"
+						placeholder="City" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-default btn-primary">Save</button>
+					<button type="reset" class="btn btn-default">Reset</button>
+				</div>
+			</div>
+		</form>
+
 		<div class="footer">
 			<p>
 				<a
@@ -91,22 +110,12 @@ tr.head td {
 	<script src="./scripts/bootstrap/scrollspy.js"></script>
 	<script src="./scripts/bootstrap/collapse.js"></script>
 	<script src="./scripts/bootstrap/tab.js"></script>
-	
-	<script language='javascript' src='./scripts/angular/angular.js'></script>
-	<script language='javascript' src='./scripts/angular/angular-route.js'></script>
-	<script language='javascript' src='./scripts/angular/angular-ui-router.min.js'></script>
-	<script language='javascript' src='./scripts/angular/ui-bootstrap-tpls-0.12.0.min.js'></script>
-	<script language='javascript' src='./scripts/angular/lodash.min.js'></script>
-	
-	<script language='javascript' src='./scripts/controllers/app.js'></script>
-	<script language='javascript' src='./scripts/controllers/city-controllers.js'></script>
 
 	<!-- endbuild -->
 
 	<!-- build:js({app,.tmp}) scripts/main.js -->
 	<script src="./scripts/main.js"></script>
-	<script
-		src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
 	<script src="./scripts/jquery.geocomplete.js"></script>
 	<!-- endbuild -->
 
