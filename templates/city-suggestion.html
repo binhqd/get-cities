@@ -32,7 +32,8 @@
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 
 				<li role="presentation" ng-repeat="state in global.states | filter:model.state" ng-click="selectState(state)">
-					<a role="menuitem" tabindex="-1" href="javascript:void(0)" ref='{{state.stateID}}'>{{state.stateName}}</a>
+					<a ng-if="state.stateID != -1" role="menuitem" href="javascript:void(0)" ref='{{state.stateID}}'>{{state.stateName}}</a>
+					<a ng-if="state.stateID == -1" role="menuitem" href="javascript:void(0)" ref='{{state.stateID}}'><b>{{state.stateName}}</b></a>
 				</li>
 
 			</ul>

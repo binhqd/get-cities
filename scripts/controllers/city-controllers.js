@@ -58,44 +58,17 @@ CityCtrls.controller('CityCtrl', function($scope, $rootScope, $http,
 			$scope.state.loadingStates = false;
 			$scope.global.states = res;
 
-		}).error(function(xhr) {
-			console.log(xhr);
-		});
-	}
-
-	$scope.selectState = function(state) {
-		$scope.global.state = state;
-		$scope.model.state = state.stateName;
-
-		$scope.loadCities(state);
-	}
-
-	$scope.loadCities = function(state) {
-		$scope.state.loadingStates = true;
-		var req = {
-			method : 'GET',
-			url : './cities.php?stateID=' + state.stateID
-		}
-
-		$http(req).success(function(res) {
-			// $scope.state.loadingStates = false;
-			$scope.global.cities = res;
-
-			$scope.global.cities.push({
-				cityID : -1,
-				cityName : "Other"
+			$scope.global.states.push({
+				stateID : -1,
+				stateName : "Other"
 			});
 		}).error(function(xhr) {
 			console.log(xhr);
 		});
 	}
-
-	$scope.selectCity = function(city) {
-		if (city.cityID != -1) {
-			$scope.global.city = city;
-			$scope.model.city = city.cityName;
-		} else {
-			// Load Google Suggestion
+	
+	$scope.useGoogleSuggest = function() {
+		// Load Google Suggestion
 			$scope.global.useSuggestion = true;
 			
 			$("#geocomplete").geocomplete().bind(
@@ -140,6 +113,46 @@ CityCtrls.controller('CityCtrl', function($scope, $rootScope, $http,
 							}
 						});
 					});
+	}
+	$scope.selectState = function(state) {
+		if (state.stateID != -1) {
+			$scope.global.state = state;
+    		$scope.model.state = state.stateName;
+    
+    		$scope.loadCities(state);
+		} else {
+			$scope.useGoogleSuggest();
+		}
+		
+	}
+
+	$scope.loadCities = function(state) {
+		$scope.state.loadingStates = true;
+		var req = {
+			method : 'GET',
+			url : './cities.php?stateID=' + state.stateID
+		}
+
+		$http(req).success(function(res) {
+			// $scope.state.loadingStates = false;
+			$scope.global.cities = res;
+
+			$scope.global.cities.push({
+				cityID : -1,
+				cityName : "Other"
+			});
+		}).error(function(xhr) {
+			console.log(xhr);
+		});
+	}
+
+	$scope.selectCity = function(city) {
+		if (city.cityID != -1) {
+			$scope.global.city = city;
+			$scope.model.city = city.cityName;
+		} else {
+			// Load Google Suggestion
+			$scope.useGoogleSuggest();
 		}
 
 		// $scope.loadCities(state);
