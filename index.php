@@ -32,6 +32,10 @@ $countries = $obj->countries;
 tr.head td {
 	background: #ddd
 }
+.suggestion-section {
+    max-height: 200px;
+    overflow: auto;
+}
 </style>
 </head>
 <body>
