@@ -5,36 +5,48 @@
 
 		<label for="txtName" class="col-sm-2 control-label">Country</label>
 		<div class="col-sm-4">
-			<input type="text" name='country' class="form-control" id="txtCountry" placeholder="Select Country"  data-toggle="dropdown" aria-expanded="true" ng-model="model.country"  ng-disabled="global.useSuggestion"/>
-			<ul class="dropdown-menu suggestion-section" role="menu" aria-labelledby="dropdownMenu1">
+			<input type="text" name='country' class="form-control"
+				id="txtCountry" placeholder="Select Country" data-toggle="dropdown"
+				aria-expanded="true" ng-model="model.country"
+				ng-disabled="global.useSuggestion"
+				ng-keydown="openSuggestion($event)" />
+			<ul class="dropdown-menu suggestion-section" role="menu"
+				aria-labelledby="dropdownMenu1">
 
-				<li role="presentation" ng-repeat="country in global.countries | filter:model.country" ng-click="selectCountry(country)">
-					<a role="menuitem" tabindex="-1" href="javascript:void(0)" ref='{{country.countryID}}'>{{country.countryName}}</a>
+				<li role="presentation"
+					ng-repeat="country in global.countries | filter:model.country"
+					ng-click="selectCountry(country)">
+					<a role="menuitem" tabindex="-1" href="javascript:void(0)"
+						ref='{{country.countryID}}'>{{country.countryName}}</a>
 				</li>
 
 			</ul>
 		</div>
-	
+
 	</div>
-	
+
 	<div class="form-group">
 
 		<label for="txtName" class="col-sm-2 control-label">State</label>
 		<div class="col-sm-4">
-			<input type="text" name='state' class="form-control" id="txtState" data-toggle="dropdown" aria-expanded="true" placeholder="Select State" ng-model="model.state" ng-disabled="global.useSuggestion"/>
-			<!-- <button class="btn btn-default dropdown-toggle" type="button" id="dropdownState" data-toggle="dropdown" aria-expanded="true">
-				<span ng-if="!global.state">Select State</span>
-				<span ng-if="state.loadingStates">Loading states ...</span>
-				<span ng-if="!!global.state">{{global.state.stateName}}</span>
-				<span class="caret"></span>
-			</button>
-			 -->
-			<ul class="dropdown-menu suggestion-section" role="menu" aria-labelledby="dropdownMenu1">
+			<input type="text" name='state' class="form-control" id="txtState"
+				data-toggle="dropdown" aria-expanded="true"
+				placeholder="Select State" ng-model="model.state"
+				ng-disabled="global.useSuggestion"
+				ng-keydown="openSuggestion($event)" />
+			
+			<ul class="
+				dropdown-menu suggestion-section" role="menu"
+				aria-labelledby="dropdownMenu1">
 
-				<li role="presentation" ng-repeat="state in global.states | filter:model.state" ng-click="selectState(state)">
-					<a ng-if="state.stateID != -1" role="menuitem" href="javascript:void(0)" ref='{{state.stateID}}'>{{state.stateName}}</a>
-					<a ng-if="state.stateID == -1" role="menuitem" href="javascript:void(0)" ref='{{state.stateID}}'><b>{{state.stateName}}</b></a>
-				</li>
+			<li role="presentation"
+				ng-repeat="state in global.states | filter:model.state"
+				ng-click="selectState(state)">
+				<a ng-if="state.stateID != -1" role="menuitem"
+					href="javascript:void(0)" ref='{{state.stateID}}'>{{state.stateName}}</a>
+				<a ng-if="state.stateID == -1" role="menuitem"
+					href="javascript:void(0)" ref='{{state.stateID}}'><b>{{state.stateName}}</b></a>
+			</li>
 
 			</ul>
 		</div>
@@ -52,22 +64,32 @@
 	<div class="form-group">
 		<label for="txtEdition" class="col-sm-2 control-label">City</label>
 		<div class="col-sm-4">
-			<input type="text" name='city' class="form-control" id="txtCity" placeholder="City"  data-toggle="dropdown" aria-expanded="true" ng-model="model.city"  ng-disabled="global.useSuggestion"/>
-			<ul class="dropdown-menu suggestion-section" role="menu" aria-labelledby="dropdownMenu1">
+			<input type="text" name='city' class="form-control" id="txtCity"
+				placeholder="City" data-toggle="dropdown" aria-expanded="true"
+				ng-model="model.city" ng-disabled="global.useSuggestion"
+				ng-keydown="openSuggestion($event)"/>
+			<ul class=" dropdown-menu
+				suggestion-section" role="menu" aria-labelledby="dropdownMenu1">
 
-				<li role="presentation" ng-repeat="city in global.cities | filter:model.city" ng-click="selectCity(city)">
-					<a ng-if="city.cityID != -1" role="menuitem" href="javascript:void(0)" ref='{{city.cityID}}'>{{city.cityName}}</a>
-					<a ng-if="city.cityID == -1" role="menuitem" href="javascript:void(0)" ref='{{city.cityID}}'><b>{{city.cityName}}</b></a>
-				</li>
+			<li role="presentation"
+				ng-repeat="city in global.cities | filter:model.city"
+				ng-click="selectCity(city)">
+				<a ng-if="city.cityID != -1" role="menuitem"
+					href="javascript:void(0)" ref='{{city.cityID}}'>{{city.cityName}}</a>
+				<a ng-if="city.cityID == -1" role="menuitem"
+					href="javascript:void(0)" ref='{{city.cityID}}'><b>{{city.cityName}}</b></a>
+			</li>
 
 			</ul>
 		</div>
 	</div>
-	
+
 	<div class="form-group" ng-show="global.useSuggestion">
 		<label for="txtName" class="col-sm-2 control-label">Location</label>
 		<div class="col-sm-4">
-			<input class="form-control" id="geocomplete" name="geocomplete" style="width: 300px;" type="text" placeholder="Location" /> <a href='javascript:void(0)' ng-click="global.useSuggestion = false">Close</a>
+			<input class="form-control" id="geocomplete" name="geocomplete"
+				style="width: 300px;" type="text" placeholder="Location" />
+			<a href='javascript:void(0)' ng-click="global.useSuggestion = false">Close</a>
 
 		</div>
 	</div>

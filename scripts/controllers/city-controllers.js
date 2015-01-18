@@ -47,7 +47,13 @@ CityCtrls.controller('CityCtrl', function($scope, $rootScope, $http,
 		$scope.loadStates(country);
 	}
 
-	
+	$scope.openSuggestion = function($event) {
+		var elem = angular.element($event.target);
+		
+		if (!elem.parent().hasClass('open')) {
+			$($event.target).dropdown('toggle');
+		}
+	}
 
 	$scope.loadStates = function(country) {
 		$scope.state.loadingStates = true;
