@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="org.eclipse.dltk.core.index:5.0.0.201403041902"/>
+		<item value="org.eclipse.dltk.core:5.0.0.201403041902"/>
+		<item value="org.eclipse.emf.common.ui:2.9.0.v20140901-1055"/>
+		<item value="org.eclipse.emf.common:2.10.1.v20140901-1043"/>
+		<item value="org.eclipse.emf.ecore.edit:2.9.0.v20140901-1055"/>
+		<item value="org.eclipse.emf.ecore:2.10.1.v20140901-1043"/>
+		<item value="org.eclipse.emf.edit.ui:2.10.1.v20140901-1055"/>
+		<item value="org.eclipse.emf.edit:2.10.1.v20140901-1055"/>
+		<item value="org.eclipse.help:2.0.102.v20140925-0400"/>
+		<item value="org.eclipse.platform:4.4.0.v20140925-0400"/>
+		<item value="org.eclipse.rcp:4.4.0.v20140925-0400"/>
+		<item value="org.eclipse.wst.common.fproj:3.6.1.v201409111446"/>
+		<item value="org.eclipse.wst.jsdt.feature:1.6.100.v201409111605"/>
+		<item value="org.eclipse.wst.web_ui.feature:3.6.1.v201409112028"/>
+		<item value="org.eclipse.wst.xml_ui.feature:3.6.1.v201409111852"/>
+		<item value="org.eclipse.xsd.edit:2.8.0.v20140901-1055"/>
+		<item value="org.eclipse.xsd:2.10.0.v20140901-1055"/>
+	</list>
+</section>

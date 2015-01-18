@@ -55,7 +55,7 @@ class Country extends CommonComponent implements JsonSerializable
                     'countryID' => $record['countryID'],
                     'countryName' => $record['countryName'],
                     'localName' => $record['localName'],
-                    'webCode' => $record['webCode']
+                    'iso_code' => $record['iso_code']
                 );
                 
                 $countries[] = $country;

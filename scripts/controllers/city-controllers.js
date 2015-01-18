@@ -41,7 +41,9 @@ CityCtrls.controller('CityCtrl', function($scope, $rootScope, $http,
 	$scope.selectCountry = function(country) {
 		$scope.global.country = country;
 		$scope.model.country = country.countryName;
-
+		
+		$scope.model.state = '';
+		$scope.model.city = '';
 		$scope.loadStates(country);
 	}
 
@@ -115,6 +117,8 @@ CityCtrls.controller('CityCtrl', function($scope, $rootScope, $http,
 					});
 	}
 	$scope.selectState = function(state) {
+		$scope.model.city = '';
+		
 		if (state.stateID != -1) {
 			$scope.global.state = state;
     		$scope.model.state = state.stateName;
